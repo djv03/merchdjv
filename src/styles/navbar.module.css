@@ -1,0 +1,17 @@
+.logo{
+    border: 2px solid red;
+    margin: 13px;
+}
+.navbar{
+    display: flex;
+    justify-content: space-between;
+}
+.navenditems{
+    border: 2px solid red;
+    display: flex;
+}
+#cart{
+    border: 2px solid red;
+    margin: 13px;
+    padding: 33px;
+}
