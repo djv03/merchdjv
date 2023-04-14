@@ -11,7 +11,9 @@ const Navbar = () => {
 
             {/* logo section */}
             <div className=' p-4 mx-4 '>
+                <Link href={'/'}>
                 <Image className='h-18 w-14 border-0 rounded-3xl ' src={logo} alt='merchdjv.com0'></Image>
+                </Link>
             </div>
 
             {/* navlinks section */}
