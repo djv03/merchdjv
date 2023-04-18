@@ -4,28 +4,33 @@ import Image from 'next/image'
 
 
 import logo from '../../public/logo.png'
-import { AiOutlineShoppingCart, AiFillCloseCircle,AiOutlinePlusCircle,AiOutlineMinusCircle } from 'react-icons/ai'
-import {BsBagCheckFill} from 'react-icons/bs'
-const Navbar = () => {
+import { AiOutlineShoppingCart, AiFillCloseCircle, AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai'
+import { BsBagCheckFill } from 'react-icons/bs'
+const Navbar = ({ cart, addtoCart, removefromCart, clearCart, total }) => {
 
     const cartref = useRef();
     const toggleCart = () => {
-        // console.log('clicked');
-        // console.log( cartref.current.classList.contains('translate-x-full'));
-        // console.log( cartref.current.classList.contains('translate-x-0'));
 
-        if(cartref.current.classList.contains('translate-x-full')){
-            console.log('in')
+        // if (cartref.current.classList.contains('translate-x-full')) {
+        //     console.log('in')
+        //     cartref.current.classList.remove('translate-x-full');
+        //     cartref.current.classList.add('translate-x-0');
+        // }
+        // else if (cartref.current.classList.contains('translate-x-0')) {
+
+        //     console.log('out')
+        //     cartref.current.classList.add('translate-x-full')
+        //     cartref.current.classList.remove('translate-x-0')
+        // }
+        if(document.querySelector('.checkout').classList.contains('translate-x-full')){
             cartref.current.classList.remove('translate-x-full');
             cartref.current.classList.add('translate-x-0');
         }
-        else if(cartref.current.classList.contains('translate-x-0')){
-            
-            console.log('out')
-            cartref.current.classList.add('translate-x-full')
-            cartref.current.classList.remove('translate-x-0')
+        else{
+            cartref.current.classList.add('translate-x-full');
+            cartref.current.classList.remove('translate-x-0');
         }
-        
+
     }
     return (
         <div className='flex flex-wrap justify-between '>
@@ -54,18 +59,31 @@ const Navbar = () => {
                 <div className='m-5 cursor-pointer hover:text-emerald-300' onClick={toggleCart} ref={cartref}><AiOutlineShoppingCart className='text-3xl ' /></div>
             </div>
 
-            <div className="checkout absolute h-[100vh] top-4 right-0 bg-emerald-200 p-4 transform transition-transform translate-x-full " onClick={toggleCart} ref={cartref}>
-                <div className=' top-3 right-2  cursor-pointer text-2xl' >
+            <div className="checkout absolute h-[100vh] top-4 right-0 bg-emerald-400 p-4 transform transition-transform translate-x-full" id='sidecart'  ref={cartref}    >
+                <div className=' top-3 right-2  cursor-pointer text-2xl' onClick={toggleCart} >
                     <AiFillCloseCircle />
                 </div>
 
                 <h1 className='mt-4'>merchdjv- Your checkout</h1>
                 <h3 className=' mt-4 font-bold'>your products</h3>
-                <li>item 1</li>
-                <li>item 2</li>
-                <li>item 3</li>
-                <button className='flex mt-4 rounded-md py-2 px-4 text-white bg-green-600 hover:bg-green-800'><BsBagCheckFill className='m-1 '/>checkout</button>
+                {Object.keys(cart).length==0 && <div className='my-4 text-base'>cart is empty!!!</div>}
+                {Object.keys(cart).map((k) => {
+                    return <li key={cart[k]} >
+                        <div className="item flex my-5">
+                            <div className='w-2/3 font-semibold'> {cart[k].name} </div>
+                                <span className='mx-2 text-sm '>₹ {cart[k].price}</span>
+                            <div className='flex font-semibold items-center justify-center w-1/3 text-lg'>
+                                <AiOutlineMinusCircle onClick={()=>{removefromCart(k, 1, cart[k].price, cart[k].name,cart[k].size, cart[k].variant)}} className='cursor-pointer text-black' />
+                                <span className='mx-2 text-sm '>{cart[k].qty}</span>
+                                <AiOutlinePlusCircle onClick={()=>{addtoCart(k, cart[k].qty, cart[k].price, cart[k].name,cart[k].size, cart[k].variant)}} className='cursor-pointer text-black' />
+                            </div>
+                        </div>
+                        item 1</li>
+                })}
 
+                <button className='flex mt-4 rounded-md py-2 px-4 text-white bg-green-600 hover:bg-green-800'><BsBagCheckFill className='m-1 ' />checkout</button>
+                <button onClick={()=>{clearCart()}} className='mt-4 rounded-md py-2 px-4 text-white bg-red-400 hover:bg-red-600'>clearCart</button>
+                <button onClick={()=>{clearCart()}} className='mt-4 rounded-md py-2 px-6 text-white bg-black'>total: </button>
             </div>
         </div>
 
