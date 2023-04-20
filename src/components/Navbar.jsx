@@ -58,12 +58,16 @@ const Navbar = ({ cart, addtoCart, removefromCart, clearCart, total }) => {
 
             {/* navend section */}
             <div className='flex '>
+                <Link href={'/login'}>
                 <button className='rounded bg-slate-400 text-emerald-300  m-4 p-2 w-24 h-10 ease-in duration-100 font-bold hover:bg-slate-600 '>Login</button>
+                </Link>
+                <Link href={'/signup'}>
                 <button className='rounded bg-slate-200 text-green-600 m-4 p-2 w-24 h-10 ease-in duration-100 font-bold hover:bg-slate-400'>Sign up</button>
+                </Link>
                 <div className='m-5 cursor-pointer hover:text-emerald-300' onClick={toggleCart} ref={cartref}><AiOutlineShoppingCart className='text-3xl ' /></div>
             </div>
 
-            <div className={`checkout absolute h-[100vh] top-4 right-0 bg-emerald-400 p-4 transform transition-transform ${Object.keys(cart).length===0 ? 'translate-x-full':'translate-x-0'}`} id='sidecart'  ref={cartref}    >
+            <div className={`checkout absolute h-[100vh] top-4 right-0 bg-emerald-400 p-4 transhtmlForm transition-transhtmlForm ${Object.keys(cart).length===0 ? 'translate-x-full':'translate-x-0'}`} id='sidecart'  ref={cartref}    >
                 <div className=' top-3 right-2  cursor-pointer text-2xl' onClick={toggleCart} >
                     <AiFillCloseCircle />
                 </div>
