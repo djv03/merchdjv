@@ -32,13 +32,17 @@ const Navbar = ({ cart, addtoCart, removefromCart, clearCart, total }) => {
         }
 
     }
+
+    const checkoutclick=()=>{
+        cartref.current.classList.add('translate-x-full');
+    }
     return (
-        <div className='flex flex-wrap justify-between '>
+        <div className='flex flex-wrap justify-between sticky top-0 bg-white z-10 '>
 
             {/* logo section */}
-            <div className=' p-4 mx-4 '>
+            <div className=' mx-4 mt-2'>
                 <Link href={'/'}>
-                    <Image className='h-18 w-14 border-0 rounded-3xl ' src={logo} alt='merchdjv.com0'></Image>
+                    <Image className='h-14 w-14 border-0 rounded-3xl ' src={logo} alt='merchdjv.com0'></Image>
                 </Link>
             </div>
 
@@ -59,7 +63,7 @@ const Navbar = ({ cart, addtoCart, removefromCart, clearCart, total }) => {
                 <div className='m-5 cursor-pointer hover:text-emerald-300' onClick={toggleCart} ref={cartref}><AiOutlineShoppingCart className='text-3xl ' /></div>
             </div>
 
-            <div className="checkout absolute h-[100vh] top-4 right-0 bg-emerald-400 p-4 transform transition-transform translate-x-full" id='sidecart'  ref={cartref}    >
+            <div className={`checkout absolute h-[100vh] top-4 right-0 bg-emerald-400 p-4 transform transition-transform ${Object.keys(cart).length===0 ? 'translate-x-full':'translate-x-0'}`} id='sidecart'  ref={cartref}    >
                 <div className=' top-3 right-2  cursor-pointer text-2xl' onClick={toggleCart} >
                     <AiFillCloseCircle />
                 </div>
@@ -78,12 +82,16 @@ const Navbar = ({ cart, addtoCart, removefromCart, clearCart, total }) => {
                                 <AiOutlinePlusCircle onClick={()=>{addtoCart(k, cart[k].qty, cart[k].price, cart[k].name,cart[k].size, cart[k].variant)}} className='cursor-pointer text-black' />
                             </div>
                         </div>
-                        item 1</li>
+                        </li>
                 })}
 
-                <button className='flex mt-4 rounded-md py-2 px-4 text-white bg-green-600 hover:bg-green-800'><BsBagCheckFill className='m-1 ' />checkout</button>
+                <div className="cart-buttons flex flex-col mt-8 ">
+                    <Link href={'/checkout'}>
+                <button onClick={checkoutclick} className='flex justify-center rounded-md py-2 px-4 text-white bg-green-600 hover:bg-green-800'> <BsBagCheckFill className='m-1' />checkout</button>
+                    </Link>
+                <button onClick={()=>{clearCart()}} className='mt-4 rounded-md py-2 px-6 text-white bg-black'>Total:{total}  </button>
                 <button onClick={()=>{clearCart()}} className='mt-4 rounded-md py-2 px-4 text-white bg-red-400 hover:bg-red-600'>clearCart</button>
-                <button onClick={()=>{clearCart()}} className='mt-4 rounded-md py-2 px-6 text-white bg-black'>total: </button>
+                </div>
             </div>
         </div>
 

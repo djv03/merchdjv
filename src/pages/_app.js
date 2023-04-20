@@ -15,6 +15,7 @@ export default function App({ Component, pageProps }) {
     try {
       if (localStorage.getItem('cart')) {
         setCart(JSON.parse(localStorage.getItem('cart')))
+        saveCart(JSON.parse(localStorage.getItem('cart')));
       }
     } catch (error) {
       console.log('unexpected error occured');
@@ -43,6 +44,8 @@ export default function App({ Component, pageProps }) {
 
   //task 2. adding product to the cart
   const addtoCart = (productid, qty, price, name, size, variant) => {
+
+    
     let newcart = cart
     if (productid in cart) {
       newcart[productid].qty = cart[productid].qty + qty
