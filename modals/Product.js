@@ -16,5 +16,5 @@ const merchdjv_productSchenma= new mongoose.Schema({
 
 mongoose.models={}
 
-// export default mongoose.model("product", merchdjv_productSchenma);
-export default mongoose.models.Product || mongoose.model('Product', merchdjv_productSchenma)
+export default mongoose.model('Product', merchdjv_productSchenma);
+// export default mongoose.models.Product || mongoose.model('Product', merchdjv_productSchenma)

@@ -17,13 +17,16 @@ async function handler(req, res) {
                 availbaleQty: req.body[i].availbaleQty,
             })
             await p.save()
+            //this is the fukcin line that saves all the data that has been passes thorough the POST request
+            // and this POST request is made by thunderclient 
+            //now this is the hectic of mongoose.js that what is connectDB function do(go to that file)
         }
 
 
-        res.status(200).json({ sucess: "added sucessfully" })
+        res.status(200).json({ sucess: "added sucessfully in djvmerchF>products" })
     }
     else {
-        res.status(400).json({ erro: "this method is not allowed" })
+        res.status(400).json({ error: "this method is not allowed" })
     }
 
 }
