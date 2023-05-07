@@ -10,7 +10,7 @@ const merchdjv_productSchenma= new mongoose.Schema({
     size:{type:String, required:true},
     color:{type:String, required:true},
     price: {type:String, required:true},
-    availbaleQty: {type:Number, required:true},
+    availableQty: {type:Number, required:true},
    
 },{timestamps:true});
 
