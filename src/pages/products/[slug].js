@@ -9,7 +9,7 @@ const Post = ({ addtoCart, product, variants }) => {
   // console.log(variants);
   const router = useRouter()
   const { slug } = router.query
-
+  console.log(slug);
   const [pin, setPin] = useState();
   const [isavailable, setIsavailable] = useState();
 
@@ -37,11 +37,15 @@ const Post = ({ addtoCart, product, variants }) => {
   const [color, setColor] = useState(product.color);
   const [size, setSize] = useState(product.size);
 
-  const refreshPage=(newSize,newColor)=>{
-  console.log('variants is ', variants,newSize,newColor)
 
-    let url=`http://localhost:3000/product/${variants[newColor][newSize]['slug']}`
-    window.location=url;
+  const refreshPage=(newSize,newColor)=>{
+    console.log("kjhgc");
+    setSize(newSize)
+    setColor(newColor)
+    // setSize()
+    router.replace(`http://localhost:3000/products/${variants[newColor][newSize]['slug']}`)
+    // let url=`http://localhost:3000/product/${variants[newColor][newSize]['slug']}`
+    // window.location=url;
   }
   return <>
     <section className="text-gray-600 body-font overflow-hidden">
@@ -105,7 +109,7 @@ const Post = ({ addtoCart, product, variants }) => {
               <div className="flex ml-6 items-center">
                 <span className="mr-3">Size</span>
                 <div className="relative">
-                  <select value={size} onChange={(e)=>{refreshPage(e.target.value,color,)}} className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-200 focus:border-emerald-500 text-base pl-3 pr-10">
+                  <select value={size} onChange={(e)=>{refreshPage(e.target.value,color)}} className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-200 focus:border-emerald-500 text-base pl-3 pr-10">
                 {/* {console.log('form color part:')}
                     {console.log(variants[color])} */}
                     {Object.keys(variants[color]).includes('S') && <option value={'S'}>S</option>}
