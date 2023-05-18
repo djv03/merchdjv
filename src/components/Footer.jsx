@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import logo from '../../public/logo.png'
 
 
@@ -13,40 +14,32 @@ const Footer = () => {
 
           <span className="ml-3 text-xl text-emerald-300">merchdjv</span>
         </a>
-        <p className="mt-2 text-sm text-gray-500">one stop solution for all your fantasy</p>
+        <p className="mt-2 text-sm text-gray-500">one stop solution for all your code fantasy</p>
       </div>
-      <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
+      <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-le ft text-center">
         <div className="lg:w-1/4 md:w-1/2 w-full px-4">
           <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
           <nav className="list-none mb-10">
-            <li>
-              <a className="text-gray-600 hover:text-gray-800">First Link</a>
-            </li>
-            <li>
-              <a className="text-gray-600 hover:text-gray-800">Second Link</a>
-            </li>
-            <li>
-              <a className="text-gray-600 hover:text-gray-800">Third Link</a>
-            </li>
-            <li>
-              <a className="text-gray-600 hover:text-gray-800">Fourth Link</a>
-            </li>
+          <Link href={'/tshirts'}> <li className='hover:text-emerald-300 ease-in duration-100'>tshirts</li></Link>
+                    <Link href={'/hoodies'}> <li className='hover:text-emerald-300 ease-in duration-100'>hoddies</li></Link>
+                    <Link href={'/mugs'}> <li className='hover:text-emerald-300 ease-in duration-100'>Mugs</li></Link>
+                    <Link href={'/acessories'}> <li className='hover:text-emerald-300 ease-in duration-100'>acessories</li></Link>
           </nav>
         </div>
         <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-          <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
+          <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">SOCIALS</h2>
           <nav className="list-none mb-10">
             <li>
-              <a className="text-gray-600 hover:text-gray-800">First Link</a>
+              <a className="text-gray-600 hover:text-gray-800">Facebook</a>
             </li>
             <li>
-              <a className="text-gray-600 hover:text-gray-800">Second Link</a>
+              <a className="text-gray-600 hover:text-gray-800">instagram</a>
             </li>
             <li>
-              <a className="text-gray-600 hover:text-gray-800">Third Link</a>
+              <a className="text-gray-600 hover:text-gray-800">twitter</a>
             </li>
             <li>
-              <a className="text-gray-600 hover:text-gray-800">Fourth Link</a>
+              <a className="text-gray-600 hover:text-gray-800">mail us</a>
             </li>
           </nav>
         </div>
@@ -88,8 +81,8 @@ const Footer = () => {
     </div>
     <div className="bg-gray-100">
       <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
-        <p className="text-gray-500 text-sm text-center sm:text-left">© 2023 merchdjv —
-          <a href="https://twitter.com/knyttneve" rel="noopener noreferrer" className="text-gray-600 ml-1" target="_blank">@codeswear pvt. ltd. </a>
+        <p className="text-gray-500 text-sm text-center sm:text-left">© 2023 merchdjv — all rights reserved
+          <a href="https://twitter.com/knyttneve" rel="noopener noreferrer" className="text-gray-600 ml-1" target="_blank">@merchdjv pvt. ltd. </a>
         </p>
         <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
           <a className="text-gray-500">

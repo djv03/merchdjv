@@ -76,24 +76,25 @@ const Navbar = ({ cart, addtoCart, removefromCart, clearCart, total }) => {
                 <h3 className=' mt-4 font-bold'>your products</h3>
                 {Object.keys(cart).length==0 && <div className='my-4 text-base'>cart is empty!!!</div>}
                 {Object.keys(cart).map((k) => {
-                    return <li key={cart[k]} >
+                    return <ul key={cart[k]} >
                         <div className="item flex my-5">
-                            <div className='w-2/3 font-semibold'> {cart[k].name} </div>
+                            <div className='w-2/3 font-semibold'> {cart[k].title} </div>
+                                <span className='mx-2 text-sm '>{cart[k].size}/{cart[k].variant}</span>
                                 <span className='mx-2 text-sm '>₹ {cart[k].price}</span>
                             <div className='flex font-semibold items-center justify-center w-1/3 text-lg'>
-                                <AiOutlineMinusCircle onClick={()=>{removefromCart(k, 1, cart[k].price, cart[k].name,cart[k].size, cart[k].variant)}} className='cursor-pointer text-black' />
+                                <AiOutlineMinusCircle onClick={()=>{removefromCart(k, 1, cart[k].price, cart[k].title,cart[k].size, cart[k].variant)}} className='cursor-pointer text-black' />
                                 <span className='mx-2 text-sm '>{cart[k].qty}</span>
-                                <AiOutlinePlusCircle onClick={()=>{addtoCart(k, cart[k].qty, cart[k].price, cart[k].name,cart[k].size, cart[k].variant)}} className='cursor-pointer text-black' />
+                                <AiOutlinePlusCircle onClick={()=>{addtoCart(k, cart[k].qty, cart[k].price, cart[k].title,cart[k].size, cart[k].variant)}} className='cursor-pointer text-black' />
                             </div>
                         </div>
-                        </li>
+                        </ul>
                 })}
 
                 <div className="cart-buttons flex flex-col mt-8 ">
                     <Link href={'/checkout'}>
                 <button onClick={checkoutclick} className='flex justify-center rounded-md py-2 px-4 text-white bg-green-600 hover:bg-green-800'> <BsBagCheckFill className='m-1' />checkout</button>
                     </Link>
-                <button onClick={()=>{clearCart()}} className='mt-4 rounded-md py-2 px-6 text-white bg-black'>Total:{total}  </button>
+                <button className='mt-4 rounded-md py-2 px-6 text-white bg-black cursor-default'>Total:{total}  </button>
                 <button onClick={()=>{clearCart()}} className='mt-4 rounded-md py-2 px-4 text-white bg-red-400 hover:bg-red-600'>clearCart</button>
                 </div>
             </div>

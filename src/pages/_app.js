@@ -32,7 +32,7 @@ export default function App({ Component, pageProps }) {
     //task 1.2 getting total prize of cart
     let total=0;
 
-    //note to myself: Object.keys() is a built-in method that is used to retrieve an array of all the enumerable property names of an object.
+    //note to myself: Object.keys() is a built-in method that is used to retrieve an array of all the enumerable property titles of an object.
                       // matlab sari keys ka array bana dega, you can check this by
     
     console.log( (Object.keys(mycart)).length ) //this will give length array of all the keys in the mycart
@@ -43,20 +43,20 @@ export default function App({ Component, pageProps }) {
   }
 
   //task 2. adding product to the cart
-  const addtoCart = (productid, qty, price, name, size, variant) => {
+  const addtoCart = (productid, qty, price, title, size, variant) => {
 
     
     let newcart = cart
     if (productid in cart) {
       newcart[productid].qty = cart[productid].qty + qty
     } else {
-      newcart[productid] = {productid, qty: 1, price, name, size, variant }
+      newcart[productid] = {productid, qty: 1, price, title, size, variant }
     }
     setCart(newcart);
     saveCart(newcart);
   }
   // task 3. remove a specific product from cart
-  const removefromCart = (productid, qty, price, name, size, variant) => {
+  const removefromCart = (productid, qty, price, title, size, variant) => {
     let newcart = cart
     if (productid in cart) {
       newcart[productid].qty = cart[productid].qty - qty
