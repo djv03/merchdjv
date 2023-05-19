@@ -11,8 +11,8 @@ const merchdjv_productSchenma= new mongoose.Schema({
     color:{type:String, required:true},
     price: {type:String, required:true},
     availableQty: {type:Number, required:true},
-   
-},{timestamps:true});
+
+});
 
 mongoose.models={}
 

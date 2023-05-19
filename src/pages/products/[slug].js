@@ -201,7 +201,8 @@ export async function getServerSideProps(context) {
   let product = await Product.findOne({ slug: context.query.slug });
   console.log('slug is: ')
   console.log(context.query.slug);
-  let variants = await Product.find({ title: product.title })
+  console.log(product);
+  let variants = await Product.find({ title: product.title, category:product.category })
   console.log('title is: ')
   console.log(product.title);
   let colorSizeSlug = {} //{red:{XL:{slug:'wear-the-code-XL}}}

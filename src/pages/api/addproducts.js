@@ -14,7 +14,7 @@ async function handler(req, res) {
                 size: req.body[i].size,
                 color: req.body[i].color,
                 price: req.body[i].price,
-                availbaleQty: req.body[i].availbaleQty,
+                availableQty: req.body[i].availbaleQty,
             })
             await p.save()
             //this is the fukcin line that saves all the data that has been passes thorough the POST request

@@ -11,6 +11,7 @@ function tshirts({ allproducts }) {
 
       <div className="container px-5 py-12 mx-auto">
         <div className="flex flex-wrap m-5">
+          {Object.keys(allproducts).length==0 && <h2>all tshirts are out of stock! stay tuned for new stock...</h2>}
           {Object.keys(allproducts).map((eachproduct) => {
 
             return <div key={eachproduct._id} className="lg:w-1/5 md:w-1/2 p-4 w-full shadow-lg m-3">
