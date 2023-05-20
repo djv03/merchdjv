@@ -9,6 +9,6 @@ const merchdjv_userSchenma= new mongoose.Schema({
    
 },{timestamps:true});
 
-mongoose.models={}
+// mongoose.models={}
 
-export default mongoose.model('User',merchdjv_userSchenma);
+export default mongoose.models.Userdb || mongoose.model('Userdb',merchdjv_userSchenma);
