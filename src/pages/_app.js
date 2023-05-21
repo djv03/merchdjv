@@ -2,13 +2,15 @@ import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
 import '@/styles/globals.css'
 import { useEffect, useState } from 'react'
-
+import {useRouter} from 'next/router'
 export default function App({ Component, pageProps }) {
 
   const [cart, setCart] = useState({})
   const [total, setTotal] = useState(0);
+  const [user, setUser] = useState({value:null});
+  const [key, setKey] = useState({value:null});
 
-
+  const router = useRouter()
   useEffect(() => {
     console.log('printing from _app.js');
 
@@ -22,7 +24,19 @@ export default function App({ Component, pageProps }) {
       localStorage.clear()
     }
 
-  }, [])
+    const token= localStorage.getItem('token');
+    if (token) {
+      setUser({value:token});
+      setKey(Math.random())
+    }
+
+  }, [router.query])
+
+  const logout=()=>{
+    localStorage.removeItem('token')
+    setUser({value:null})
+    setKey(Math.random())
+  }
 
   // task 1. save a product to cart and localstorage
   const saveCart = (mycart) => {
@@ -76,7 +90,7 @@ export default function App({ Component, pageProps }) {
   }
 
 
-  return <><Navbar cart={cart}  addtoCart={addtoCart} removefromCart={removefromCart} clearCart={clearCart} total={ total}/>
+  return <><Navbar logout={logout} user={user} key={key} cart={cart}  addtoCart={addtoCart} removefromCart={removefromCart} clearCart={clearCart} total={ total}/>
     <Component cart={cart}  addtoCart={addtoCart} removefromCart={removefromCart} clearCart={clearCart} total={total} {...pageProps}  />
     <Footer />
   </>

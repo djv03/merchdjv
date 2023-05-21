@@ -1,6 +1,7 @@
 import User from "../../../modals/User";
 import connectDB from "../../../middleware/mongoose";
 import CryptoJS from "crypto-js";
+var jwt = require('jsonwebtoken');
 
 async function handler(req, res) {
     if (req.method == 'POST') {
@@ -14,7 +15,9 @@ async function handler(req, res) {
         // console.log(decryptedPass);
         if (user) {
             if (req.body.email == user.email && req.body.password == decryptedPass) {
-                res.status(200).json({ sucess: true, email: user.email, name: user.name })
+
+                var token = jwt.sign({  email: user.email, name: user.name }, 'merchdjv123',{expiresIn:'1d'});
+                res.status(200).json({sucess: true,token})
             }
             else {
                 res.status(200).json({ sucess: false, error: "invalid crendentials" })

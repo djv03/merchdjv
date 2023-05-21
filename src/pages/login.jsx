@@ -25,7 +25,7 @@ function signup() {
         setEmail('')
         setPassword('')
         if (response.sucess) {
-            
+            localStorage.setItem('token',response.token)
             toast.success('logged In sucessfully!', {
                 position: "top-left",
                 autoClose: 800,
