@@ -20,9 +20,7 @@ const Navbar = ({logout, user, cart, addtoCart, removefromCart, clearCart, total
             cartref.current.classList.add('translate-x-full');
             cartref.current.classList.remove('translate-x-0');
         }
-
     }
-
     const checkoutclick = () => {
         cartref.current.classList.add('translate-x-full');
     }

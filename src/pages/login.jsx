@@ -7,8 +7,8 @@ import Link from 'next/link';
 
 function signup() {
    const router= useRouter()
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     useEffect(()=>{
         if (localStorage.getItem('token')) {
@@ -19,7 +19,7 @@ function signup() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const data = {  email, password }
-        const res = await fetch('http://localhost:3000/api/login', {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -44,7 +44,7 @@ function signup() {
                 theme: "light",
             });
             setTimeout(() => {
-            router.push('http://localhost:3000')
+            router.push(`${process.env.NEXT_PUBLIC_HOST}`)
             },1000);
         }
         else{

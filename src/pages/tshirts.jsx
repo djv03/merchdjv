@@ -14,7 +14,7 @@ function tshirts({ allproducts }) {
           {Object.keys(allproducts).length==0 && <h2>all tshirts are out of stock! stay tuned for new stock...</h2>}
           {Object.keys(allproducts).map((eachproduct) => {
 
-            return <div key={eachproduct._id} className="lg:w-1/5 md:w-1/2 p-4 w-full shadow-lg m-3">
+            return <div key={`${allproducts[eachproduct].slug}`} className="lg:w-1/5 md:w-1/2 p-4 w-full shadow-lg m-3">
               <Link href={`/products/${allproducts[eachproduct].slug}`} className="block relative  rounded overflow-hidden  md:h-[50vh]  bg-slate-500 ">
                 <img alt="ecommerce" className=" object-top w-full h-full block" src={allproducts[eachproduct].img} />
               </Link>

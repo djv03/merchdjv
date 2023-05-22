@@ -27,7 +27,7 @@ const Post = ({ addtoCart, product, variants }) => {
   const checkPin = async () => {
     // console.log('checking')
 
-    let allPins = await fetch('http://localhost:3000/api/pincode');
+    let allPins = await fetch(` ${process.env.NEXT_PUBLIC_HOST}/api/pincode`);
     let pinJson = await allPins.json();
 
     if (pinJson.includes(parseInt(pin))) {
@@ -67,7 +67,7 @@ const Post = ({ addtoCart, product, variants }) => {
     setSize(newSize)
     setColor(newColor)
     // setSize()
-    router.replace(`http://localhost:3000/products/${variants[newColor][newSize]['slug']}`)
+    router.replace(`${process.env.NEXT_PUBLIC_HOST}/products/${variants[newColor][newSize]['slug']}`)
     // let url=`http://localhost:3000/product/${variants[newColor][newSize]['slug']}`
     // window.location=url;
   }

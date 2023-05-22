@@ -1,35 +1,35 @@
-import React, { useState ,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import {useRouter} from 'next/router'
+import { useRouter } from 'next/router'
 
 function signup() {
-    
-    const router= useRouter()
-    useEffect(()=>{
+
+    const router = useRouter()
+    useEffect(() => {
         if (localStorage.getItem('token')) {
             router.push('/')
         }
-    },[])
-    
-    const [name, setName] = useState();
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
+    }, [])
+
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const data={name,email,password}
-        const res = await fetch('http://localhost:3000/api/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      });
+        const data = { name, email, password }
+        const res = await fetch(` ${process.env.NEXT_PUBLIC_HOST}/api/signup`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
         console.log(res);
-        let response= await res.json();
-        toast.success('signup successfull!', {
+        let response = await res.json();
+        toast.success('signup successfull! Login now', {
             position: "top-center",
             autoClose: 800,
             hideProgressBar: false,
@@ -38,39 +38,42 @@ function signup() {
             draggable: true,
             progress: undefined,
             theme: "light",
-            });
+        });
         console.log(response);
         setName('')
         setEmail('')
         setPassword('')
+        setTimeout(() => {
+            router.push(`${process.env.NEXT_PUBLIC_HOST}/login`)
+        }, 500);
     }
 
     const handleChange = (e) => {
-        if (e.target.name=='name') {
+        if (e.target.name == 'name') {
             setName(e.target.value)
-        } 
-        else if (e.target.name=='email') {
+        }
+        else if (e.target.name == 'email') {
             setEmail(e.target.value)
-        } 
-        else if (e.target.name=='password') {
+        }
+        else if (e.target.name == 'password') {
             setPassword(e.target.value)
-        } 
+        }
 
     }
     return (
         <section className="">
             <ToastContainer
-position="top-center"
-autoClose={800}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-theme="light"
-/>
+                position="top-center"
+                autoClose={800}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
             <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
 
                 <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
