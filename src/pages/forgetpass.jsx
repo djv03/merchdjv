@@ -1,8 +1,14 @@
 import React from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
+import {useRouter} from 'next/router'
 
-const htmlForgetpass = () => {
+const Forgetpass = () => {
+    const router= useRouter()
+    useEffect(()=>{
+        if (localStorage.getItem('token')) {
+            router.push('/')
+        }
+    },[])
+
   return (
     <section className="">
     <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -29,4 +35,4 @@ const htmlForgetpass = () => {
   )
 }
 
-export default htmlForgetpass
+export default Forgetpass

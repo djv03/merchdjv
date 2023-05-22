@@ -3,17 +3,26 @@ import Navbar from '@/components/Navbar'
 import '@/styles/globals.css'
 import { useEffect, useState } from 'react'
 import {useRouter} from 'next/router'
+import LoadingBar from 'react-top-loading-bar'
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 export default function App({ Component, pageProps }) {
 
   const [cart, setCart] = useState({})
   const [total, setTotal] = useState(0);
   const [user, setUser] = useState({value:null});
   const [key, setKey] = useState({value:null});
+  const [progress, setProgress] = useState(0)
 
   const router = useRouter()
   useEffect(() => {
     console.log('printing from _app.js');
-
+    router.events.on('routeChangeStart',()=>{
+      setProgress(40)
+    })
+    router.events.on('routeChangeComplete',()=>{
+      setProgress(100)
+    })
     try {
       if (localStorage.getItem('cart')) {
         setCart(JSON.parse(localStorage.getItem('cart')))
@@ -36,6 +45,16 @@ export default function App({ Component, pageProps }) {
     localStorage.removeItem('token')
     setUser({value:null})
     setKey(Math.random())
+    toast.success('goodbye :(', {
+      position: "top-center",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
   }
 
   // task 1. save a product to cart and localstorage
@@ -90,7 +109,25 @@ export default function App({ Component, pageProps }) {
   }
 
 
-  return <><Navbar logout={logout} user={user} key={key} cart={cart}  addtoCart={addtoCart} removefromCart={removefromCart} clearCart={clearCart} total={ total}/>
+  return <>
+   <LoadingBar
+        color='#00FF00'
+        progress={progress}
+        onLoaderFinished={() => setProgress(0)}
+      />
+  <Navbar logout={logout} user={user} key={key} cart={cart}  addtoCart={addtoCart} removefromCart={removefromCart} clearCart={clearCart} total={ total}/>
+  <ToastContainer
+position="top-center"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+/>
     <Component cart={cart}  addtoCart={addtoCart} removefromCart={removefromCart} clearCart={clearCart} total={total} {...pageProps}  />
     <Footer />
   </>

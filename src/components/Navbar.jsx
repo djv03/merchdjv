@@ -8,7 +8,7 @@ import { AiOutlineShoppingCart, AiFillCloseCircle, AiOutlinePlusCircle, AiOutlin
 import { BsBagCheckFill } from 'react-icons/bs'
 import { MdAccountCircle } from 'react-icons/md'
 const Navbar = ({logout, user, cart, addtoCart, removefromCart, clearCart, total }) => {
-
+    // console.log(user)
     const cartref = useRef();
     const toggleCart = () => {
 
