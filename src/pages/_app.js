@@ -76,20 +76,20 @@ export default function App({ Component, pageProps }) {
   }
 
   //task 2. adding product to the cart
-  const addtoCart = (productid, qty, price, title, size, variant) => {
+  const addtoCart = (productid, qty, price, title, size, variant,img) => {
 
     
     let newcart = cart
     if (productid in cart) {
       newcart[productid].qty = cart[productid].qty + qty
     } else {
-      newcart[productid] = {productid, qty: 1, price, title, size, variant }
+      newcart[productid] = {productid, qty: 1, price, title, size, variant, img }
     }
     setCart(newcart);
     saveCart(newcart);
   }
   // task 3. remove a specific product from cart
-  const removefromCart = (productid, qty, price, title, size, variant) => {
+  const removefromCart = (productid, qty, price, title, size, variant, img) => {
     let newcart = cart
     if (productid in cart) {
       newcart[productid].qty = cart[productid].qty - qty

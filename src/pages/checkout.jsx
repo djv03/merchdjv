@@ -1,11 +1,13 @@
 import React from 'react'
+import Link from 'next/link'
 import Image from 'next/image'
 
 import { AiOutlineShoppingCart, AiFillCloseCircle, AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai'
 import { BsBagCheckFill } from 'react-icons/bs'
 
 
-const checkout = ({ cart,addtoCart,removefromCart,total}) => {
+const checkout = ({ cart, addtoCart, removefromCart, total }) => {
+  console.log("cart is", cart);
   return (
     <div className="flex justify-center content-center md:flex flex-col">
 
@@ -60,7 +62,7 @@ const checkout = ({ cart,addtoCart,removefromCart,total}) => {
                   <input type="email" id="email" name="email" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                 </div>
               </div>
-              
+
 
             </div>
           </div>
@@ -77,14 +79,15 @@ const checkout = ({ cart,addtoCart,removefromCart,total}) => {
         {Object.keys(cart).map((k) => {
           return <li key={cart[k]} className='list-none mt-6 '>
             <div className="flex justify-around text-center ">
-              <div className="product-img h-24 w-24">
-                <img src="https://m.media-amazon.com/images/I/61MPGbBpC3L._UY741_.jpg" alt="product photo" />
+              <div className="product-img ">
+                <Image src={cart[k].img} alt="product photo" />
+                  <div className='mx-4 font-bold'> {cart[k].title} </div>
               </div>
               <div className="product-details flex items-center md: flex-col  ">
-              <div>{cart[k].productid}</div>
-              <div className=' font-semibold mx-16  md: m-4'> {cart[k].name} </div>
-              <span className=''>₹ {cart[k].price}</span>
-              <div className=' font-semibold mx-16 md: m-4 '> {cart[k].qty} </div>
+                <div className="flex">
+                  <span className='mx-8 font-bold'> {cart[k].size}/{cart[k].variant}</span>
+                  <span className='mx-8 font-bold'>₹ {cart[k].price}*{cart[k].qty}</span>
+                </div>
               </div>
               <div className='flex font-semibold items-center justify-center  text-lg'>
                 <AiOutlineMinusCircle onClick={() => { removefromCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant) }} className='cursor-pointer text-black' />
@@ -92,15 +95,15 @@ const checkout = ({ cart,addtoCart,removefromCart,total}) => {
                 <AiOutlinePlusCircle onClick={() => { addtoCart(k, cart[k].qty, cart[k].price, cart[k].name, cart[k].size, cart[k].variant) }} className='cursor-pointer text-black' />
               </div>
             </div>
-            </li>
+          </li>
         })}
 
         <button className=' w-3/5 mt-8 p-2 rounded-lg m-16 text-white bg-black'>total:{total} </button>
       </div>
 
-      <div class="p-2 w-full">
-                <button class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Place Order</button>
-              </div>
+      <Link href={'/order'} class="p-2 w-full">
+        <button class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Place Order</button>
+      </Link>
     </div>
   )
 }
