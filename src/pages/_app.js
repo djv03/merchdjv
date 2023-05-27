@@ -88,6 +88,8 @@ export default function App({ Component, pageProps }) {
     } else {
       newcart[productid] = { productid, qty: 1, price, title, size, variant, img }
     }
+    document.querySelector('#sidecart').classList.remove('translate-x-full');
+    document.querySelector('#sidecart').classList.add('translate-x-0');
     setCart(newcart);
     saveCart(newcart);
   }

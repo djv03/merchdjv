@@ -30,7 +30,7 @@ const order = (cart) => {
           </div>
           <div className="flex flex-col">
             <span className="title-font font-medium text-2xl text-gray-900">₹ 1498 </span>
-            <button className="flex mx-auto text-white bg-emerald-500 border-0 py-2 px-8 mt-4 focus:outline-none hover:bg-emerald-600 rounded">Track order</button>
+            <button className="flex mx-auto text-white bg-emerald-500 border-0 py-2 px-8 mt-4 focus:outline-none hover:bg-emerald-600 rounded">Order Now</button>
             
           </div>
         </div>
