@@ -29,7 +29,7 @@ const Navbar = ({logout, user, cart, addtoCart, removefromCart, clearCart, total
         setDropdown(!dropdown)
     }
     return (
-        <div className='flex flex-wrap justify-between sticky top-0 bg-white z-10    '>
+        <div className='flex flex-wrap justify-between sticky top-0 bg-white z-10   '>
 
             {/* logo section */}
             <div className=' mx-4 mt-2'>
@@ -37,14 +37,13 @@ const Navbar = ({logout, user, cart, addtoCart, removefromCart, clearCart, total
                     <Image className='h-14 w-14 border-0 rounded-3xl ' src={logo} alt='merchdjv.com0'></Image>
                 </Link>
             </div>
-
             {/* navlinks section */}
-            <div className="">
-                <ul className='flex items-center justify-center  space-x-4 font-bold mt-6 md:text-xl mx-12'>
-                    <Link href={'/tshirts'}> <li className='hover:text-emerald-300 ease-in duration-100'>tshirts</li></Link>
-                    <Link href={'/hoodies'}> <li className='hover:text-emerald-300 ease-in duration-100'>hoddies</li></Link>
+            <div className=" absolute mt-16 mb-4 w-full md:mt-0 ">
+                <ul className='flex items-center justify-center  space-x-4 font-bold mt-6 md:text-xl mx-12 '>
+                    <Link href={'/tshirts'}> <li className='hover:text-emerald-300 ease-in duration-100'>T-Shirts</li></Link>
+                    <Link href={'/hoodies'}> <li className='hover:text-emerald-300 ease-in duration-100'>Hoddies</li></Link>
                     <Link href={'/mugs'}> <li className='hover:text-emerald-300 ease-in duration-100'>Mugs</li></Link>
-                    <Link href={'/acessories'}> <li className='hover:text-emerald-300 ease-in duration-100'>acessories</li></Link>
+                    <Link href={'/acessories'}> <li className='hover:text-emerald-300 ease-in duration-100'>Acessories</li></Link>
                 </ul>
             </div>
 
