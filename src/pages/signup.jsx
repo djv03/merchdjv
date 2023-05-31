@@ -4,8 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { useRouter } from 'next/router'
 
-import { auth } from '../../middleware/firebase';
-import { signInWithPopup,GoogleAuthProvider } from 'firebase/auth';
+import Link from 'next/link';
 
 function signup() {
 
@@ -32,23 +31,37 @@ function signup() {
         });
         console.log(res);
         let response = await res.json();
-        toast.success('signup successfull! Login now', {
-            position: "top-center",
-            autoClose: 800,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-        });
-        console.log(response);
-        setName('')
-        setEmail('')
-        setPassword('')
-        setTimeout(() => {
-            router.push(`${process.env.NEXT_PUBLIC_HOST}/login`)
-        }, 500);
+        if (response.sucess) {
+            toast.success('signup successfull! Login now', {
+                position: "top-left",
+                autoClose: 800,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            console.log(response);
+            setName('')
+            setEmail('')
+            setPassword('')
+            setTimeout(() => {
+                router.push(`${process.env.NEXT_PUBLIC_HOST}/login`)
+            }, 500);
+        } else {
+            toast.error(`${response.fail}`, {
+                position: "top-left",
+                autoClose: 800,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+       
     }
 
     const handleChange = (e) => {
@@ -64,10 +77,6 @@ function signup() {
 
     }
 
-    const googleAuth= new GoogleAuthProvider();
-    const handleGooglelogin=async()=>{
-        const result= await signInWithPopup(auth,googleAuth )
-    }
     return (
         <section className="">
             <ToastContainer
@@ -107,7 +116,9 @@ function signup() {
                             <button type="submit" className="w-full text-white bg-emerald-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">create account</button>
 
                         </form>
-                            <button onClick={handleGooglelogin} type="submit" className="w-full text-white bg-emerald-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign up with google</button>
+                        <Link href={'/firebasesignUp'}>                   
+                            <button  type="submit" className="mt-4 w-full text-white bg-blue-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign up with google</button>
+                        </Link>
                     </div>
                 </div>
             </div>
