@@ -7,7 +7,7 @@ import logo from '../../public/logo.png'
 import { AiOutlineShoppingCart, AiFillCloseCircle, AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai'
 import { BsBagCheckFill } from 'react-icons/bs'
 import { MdAccountCircle } from 'react-icons/md'
-const Navbar = ({logout, user, cart, addtoCart, removefromCart, clearCart, total }) => {
+const Navbar = ({ logout, user, cart, addtoCart, removefromCart, clearCart, total }) => {
     // console.log(user)
     const cartref = useRef();
     const toggleCart = () => {
@@ -50,25 +50,25 @@ const Navbar = ({logout, user, cart, addtoCart, removefromCart, clearCart, total
             {/* navend section */}
             <div className='flex '>
                 <a onMouseOver={() => { setDropdown(true) }} onMouseLeave={() => { setDropdown(false) }}  >
-                {dropdown &&
+                    {dropdown &&
                         <div className="absolute right-20 mt-14  bg-emerald-400 rounded-lg ">
                             <ul className='px-4 py-4 '>
-                                <li className='p-1  font-bold cursor-pointer text-white  hover:text-black '>Orders</li>
+                                <Link href={'/order'}><li className='p-1  font-bold cursor-pointer text-white  hover:text-black '>Orders</li></Link>
                                 <li className='p-1  font-bold cursor-pointer text-white  hover:text-black '>My account</li>
                                 <li onClick={logout} className='p-1 py-2   font-bold cursor-pointer text-white  hover:text-black  mt-4 bg-emerald-600 rounded-lg'>Logout</li>
                             </ul>
                         </div>
                     }
-                        {user.value && <MdAccountCircle className='text-3xl mt-5' />}
+                    {user.value && <div className='border-none hover:border-emerald-400 border-2'> <MdAccountCircle className='cursor-pointer text-3xl mt-5 hover:text-emerald-600' /></div>}
                 </a>
 
-                {!user.value && 
-                 <Link href={'/login'}>
-                    <button className='rounded bg-slate-400 text-emerald-300  m-4 p-2 w-24 h-10 ease-in duration-100 font-bold hover:bg-slate-600 '>login </button>
-                 </Link>
+                {!user.value &&
+                    <Link href={'/login'}>
+                        <button className='rounded bg-slate-400 text-emerald-300  m-4 p-2 w-24 h-10 ease-in duration-100 font-bold hover:bg-slate-600 '>login </button>
+                    </Link>
                 }
-              
-                <div className='m-5 cursor-pointer hover:text-emerald-300' onClick={toggleCart} ref={cartref}><AiOutlineShoppingCart className='text-3xl ' /></div>
+
+                <div onClick={toggleCart} ref={cartref} className=' m-2 p-3 cursor-pointer hover:text-emerald-500' ><AiOutlineShoppingCart className='border-red-700 text-3xl ' /></div>
             </div>
 
             <div className={`checkout absolute h-[100vh] top-4 right-0 bg-emerald-400 p-4 transhtmlForm transition-transhtmlForm translate-x-full `} id='sidecart' ref={cartref}    >
@@ -80,7 +80,7 @@ const Navbar = ({logout, user, cart, addtoCart, removefromCart, clearCart, total
                 <h3 className=' mt-4 font-bold'>your products</h3>
                 {Object.keys(cart).length == 0 && <div className='my-4 text-base'>cart is empty!!!</div>}
                 {Object.keys(cart).map((k) => {
-                    return <ul key={cart[k]} >
+                    return <ul key={cart[k].slug} >
                         <div className="item flex my-5">
                             <div className='w-2/3 font-semibold'> {cart[k].title} </div>
                             <span className='mx-2 text-sm '>{cart[k].size}/{cart[k].variant}</span>
