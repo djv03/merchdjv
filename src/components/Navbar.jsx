@@ -38,12 +38,12 @@ const Navbar = ({ logout, user, cart, addtoCart, removefromCart, clearCart, tota
                 </Link>
             </div>
             {/* navlinks section */}
-            <div className=" absolute mt-16 mb-4 w-full md:mt-0 ">
+            <div className=" absolute mt-16 w-full  bg-gray-400 md:relative md:mt-0 md:w-[50vw] md:bg-white  ">
                 <ul className='flex items-center justify-center  space-x-4 font-bold mt-6 md:text-xl mx-12 '>
-                    <Link href={'/tshirts'}> <li className='hover:text-emerald-300 ease-in duration-100'>T-Shirts</li></Link>
-                    <Link href={'/hoodies'}> <li className='hover:text-emerald-300 ease-in duration-100'>Hoddies</li></Link>
-                    <Link href={'/mugs'}> <li className='hover:text-emerald-300 ease-in duration-100'>Mugs</li></Link>
-                    <Link href={'/acessories'}> <li className='hover:text-emerald-300 ease-in duration-100'>Acessories</li></Link>
+                    <Link href={'/tshirts'}> <li className='mb-4 hover:text-emerald-300 ease-in duration-100'>T-Shirts</li></Link>
+                    <Link href={'/hoodies'}> <li className='mb-4 hover:text-emerald-300 ease-in duration-100'>Hoddies</li></Link>
+                    <Link href={'/mugs'}> <li className='mb-4 hover:text-emerald-300 ease-in duration-100'>Mugs</li></Link>
+                    <Link href={'/acessories'}> <li className='mb-4     hover:text-emerald-300 ease-in duration-100'>Acessories</li></Link>
                 </ul>
             </div>
 
@@ -71,14 +71,15 @@ const Navbar = ({ logout, user, cart, addtoCart, removefromCart, clearCart, tota
                 <div onClick={toggleCart} ref={cartref} className=' m-2 p-3 cursor-pointer hover:text-emerald-500' ><AiOutlineShoppingCart className='border-red-700 text-3xl ' /></div>
             </div>
 
-            <div className={`checkout absolute h-[100vh] top-4 right-0 bg-emerald-400 p-4 transhtmlForm transition-transhtmlForm translate-x-full `} id='sidecart' ref={cartref}    >
+            <div className={`checkout rounded-lg absolute h-[100vh] top-4 right-0 bg-emerald-400 p-4 transhtmlForm transition-transhtmlForm translate-x-full `} id='sidecart' ref={cartref}    >
                 <div className=' top-3 right-2  cursor-pointer text-2xl' onClick={toggleCart} >
                     <AiFillCloseCircle />
                 </div>
 
-                <h1 className='mt-4'>merchdjv- Your checkout</h1>
-                <h3 className=' mt-4 font-bold'>your products</h3>
-                {Object.keys(cart).length == 0 && <div className='my-4 text-base'>cart is empty!!!</div>}
+                <h3 className=' mt-4 font-bold'>Your Products</h3>
+                <hr  className=' mt-4 text-gray-500'/>
+                {!user.value && Object.keys(cart).length == 0 && <div className='my-4 text-base'>Login to start shopping---&gt; <Link href={'/login'}><button className='rounded bg-slate-600 text-emerald-300 p-2 w-24 h-10 ease-in duration-100 font-bold hover:bg-slate-700 '>Login </button></Link> </div>}
+                {user.value && Object.keys(cart).length == 0 && <div className='my-4 text-base'>cart is empty!!!  </div>}
                 {Object.keys(cart).map((k) => {
                     return <ul key={cart[k].slug} >
                         <div className="item flex my-5">
@@ -96,7 +97,7 @@ const Navbar = ({ logout, user, cart, addtoCart, removefromCart, clearCart, tota
 
                 <div className="cart-buttons flex flex-col mt-8 ">
                     <Link href={'/checkout'}>
-                        <button onClick={checkoutclick} className='flex justify-center rounded-md py-2 px-4 text-white bg-green-600 hover:bg-green-800'> <BsBagCheckFill className='m-1' />checkout</button>
+                        <button onClick={checkoutclick}  className='flex justify-center rounded-md py-2 px-4 text-white bg-green-600 hover:bg-green-800'> <BsBagCheckFill className='m-1' />checkout</button>
                     </Link>
                     <button className='mt-4 rounded-md py-2 px-6 text-white bg-black cursor-default'>Total:{total}  </button>
                     <button onClick={() => { clearCart() }} className='mt-4 rounded-md py-2 px-4 text-white bg-red-400 hover:bg-red-600'>clearCart</button>
