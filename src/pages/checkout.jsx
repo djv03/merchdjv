@@ -1,13 +1,36 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-
-import { AiOutlineShoppingCart, AiFillCloseCircle, AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai'
-import { BsBagCheckFill } from 'react-icons/bs'
+import { useState } from 'react'
+import { useRouter } from 'next/router'
+import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai'
 
 
 const checkout = ({ cart, addtoCart, removefromCart, total }) => {
-  console.log("cart is", cart);
+
+  const [deliveryDetails, setDeliveryDetails] = useState({
+    name: '',
+    email: '',
+    address: '',
+    pin: '',
+    mobile: '',
+  });
+
+  const router = useRouter();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    router.push({
+      pathname: '/order',
+      query: deliveryDetails, // Pass your form data as an object
+    });
+  }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setDeliveryDetails((prevDetails) => ({
+      ...prevDetails,
+      [name]: value,
+    }));
+  }
   return (
     <div className="flex justify-center content-center md:flex flex-col">
 
@@ -23,13 +46,13 @@ const checkout = ({ cart, addtoCart, removefromCart, total }) => {
               <div class="p-2 w-1/2">
                 <div class="relative">
                   <label for="name" class="leading-7 text-sm text-gray-600">Name</label>
-                  <input type="text" id="name" name="name" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                  <input onChange={handleChange} value={deliveryDetails.name} placeholder='Enter your name' type="text" id="name" name="name" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                 </div>
               </div>
               <div class="p-2 w-1/2">
                 <div class="relative">
                   <label for="email" class="leading-7 text-sm text-gray-600">Email</label>
-                  <input type="email" id="email" name="email" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                  <input onChange={handleChange} value={deliveryDetails.email} placeholder='Enter your email' type="email" id="email" name="email" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                 </div>
               </div>
               <div class="p-2 w-full">
@@ -40,14 +63,14 @@ const checkout = ({ cart, addtoCart, removefromCart, total }) => {
               </div>
               <div class="p-2 w-1/2">
                 <div class="relative">
-                  <label for="email" class="leading-7 text-sm text-gray-600">Mobile</label>
-                  <input type="email" id="email" name="email" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                  <label for="number" class="leading-7 text-sm text-gray-600">Mobile</label>
+                  <input onChange={handleChange} value={deliveryDetails.mobile} placeholder='Enter your mobile' type="text" id="mobile" name="mobile" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                 </div>
               </div>
               <div class="p-2 w-1/2">
                 <div class="relative">
                   <label for="email" class="leading-7 text-sm text-gray-600">Pincode</label>
-                  <input type="email" id="email" name="email" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                  <input onChange={handleChange} value={deliveryDetails.pin} placeholder='Enter your PIN' type="text" id="pin" name="pin" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                 </div>
               </div>
               <div class="p-2 w-1/2">
@@ -81,7 +104,7 @@ const checkout = ({ cart, addtoCart, removefromCart, total }) => {
             <div className="flex justify-around text-center ">
               <div className="product-img ">
                 <Image src={cart[k].img} alt="product photo" />
-                  <div className='mx-4 font-bold'> {cart[k].title} </div>
+                <div className='mx-4 font-bold'> {cart[k].title} </div>
               </div>
               <div className="product-details flex items-center md: flex-col  ">
                 <div className="flex">
@@ -101,9 +124,9 @@ const checkout = ({ cart, addtoCart, removefromCart, total }) => {
         <button className=' w-3/5 mt-8 p-2 rounded-lg m-16 text-white bg-black'>total:{total} </button>
       </div>
 
-      <Link href={'/order'} class="p-2 w-full">
-        <button class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Place Order</button>
-      </Link>
+      
+        <button class="flex mx-auto my-2 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg" onClick={handleSubmit}>Place Order</button>
+    
     </div>
   )
 }
