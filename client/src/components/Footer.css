@@ -1,0 +1,54 @@
+/* Footer.css */
+.footer {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-content h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+.footer-content p {
+    margin: 10px 0;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    display: inline;
+    margin-right: 10px;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-contact a {
+    color: #00b4d8; /* Light blue color for email links */
+}
+
+.social-media a {
+    color: white;
+    margin: 0 10px;
+    font-size: 1.4em;
+}
+
+.social-media i {
+    transition: color 0.3s;
+}
+
+.social-media a:hover i {
+    color: #00b4d8;
+}
