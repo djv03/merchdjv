@@ -21,8 +21,12 @@ const customerSchema = new mongoose.Schema({
     address: {
         type: {},
     },
+    question:{
+        type:String,
+    },
     answer: {
         type: String,
+        require:true,
     },
     role: {
         type: Number,

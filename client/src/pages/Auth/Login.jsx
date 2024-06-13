@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useNavigate,useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
@@ -15,10 +15,10 @@ import { useAuth } from '../../context/auth';
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    
-    const [auth,setAuth]=useAuth();
+
+    const [auth, setAuth] = useAuth();
     const navigate = useNavigate();
-    const location=useLocation();
+    const location = useLocation();
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -29,14 +29,14 @@ const Login = () => {
                 toast.success(`${res.data.message}`);
                 setAuth({
                     ...auth,
-                    customer:res.data.customer,
-                    token:res.data.token
+                    customer: res.data.customer,
+                    token: res.data.token
                 });
-                localStorage.setItem('auth',JSON.stringify(res.data))
+                localStorage.setItem('auth', JSON.stringify(res.data))
                 setTimeout(() => {
                     navigate(location.state || '/')
                 }, 500);
-                
+
             }
             else {
                 toast.error(`${res.data.message}`);
@@ -74,6 +74,9 @@ const Login = () => {
                                 onChange={(e) => setPassword(e.target.value)}
                                 required />
                         </div>
+                        <p className='forgot-pass'>
+                            <Link to={'/forgot-password'} >forgot password?</Link>
+                        </p>
                         <button type="submit" className="btn">
                             Login
                         </button>

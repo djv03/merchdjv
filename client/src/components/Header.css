@@ -48,8 +48,11 @@
     margin: 5px 0;
     transition: 0.4s;
 }
+.nav-end{
+    display: flex;
+}
 .nav-end button{
-    margin: 0px 3px;
+    margin: 7px 3px;
     padding: 7px 23px;
     border: 1px transparent;
     border-radius: 7px;
@@ -57,8 +60,15 @@
     transition-duration: 0.2s;
     font-size: 1.1rem;
 }
+.nav-end button>a{
+    text-decoration: none;
+    color: black;
+}
 .nav-end button:hover{
     border-radius: 13px;
+}
+.profile-section{
+    margin: 0px 7px;
 }
 /* Responsive styling */
 @media (max-width: 768px) {

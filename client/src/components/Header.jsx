@@ -46,7 +46,21 @@ const Header = () => {
                             <button><Link to={'/register'}>sign up</Link></button>
                         </>)
                             :
-                            (<button onClick={handleLogout}>Logout</button>)
+                            (
+                                <>
+                                    <div class="dropdown profile-section">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            {auth?.customer.name}
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><Link class="dropdown-item" to={'/profile'}> My Profile</Link></li>
+                                            <li><Link class="dropdown-item" to={'/dashboard'}>Orders</Link></li>
+                                            <li><a class="dropdown-item" href="/"><button onClick={handleLogout}>Logout</button></a></li>
+                                        </ul>
+                                    </div>
+                                    
+                                </>
+                            )
                     }
 
                     <button>cart</button>
